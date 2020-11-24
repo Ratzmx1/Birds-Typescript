@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
-import { View, FlatList, Text } from "react-native";
+import { View, FlatList } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 // import { Button, Container, Content, Text } from "native-base";
 
-import { fetchBirds, changeTheme } from "../../Redux/actionCreators";
+import { fetchBirds } from "../../Redux/actionCreators";
 
 import { InitialState } from "../../Redux/reduxIntefaces";
 
 // import { primary, secondary, textColor } from "../../Extras/colors";
 // import { birdsData } from "../../Redux/reduxIntefaces";
 
-import Bird from "../Bird";
+import { Bird } from "./Bird";
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const Home: React.FC = () => {
     <View>
       <FlatList
         data={birds}
-        renderItem={({ item }) => <Text>{item}</Text>}
+        renderItem={({ item }) => <Bird key={item.uid} bird={item} />}
         keyExtractor={(item, index) => index.toString()}
       />
     </View>

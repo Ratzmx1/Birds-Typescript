@@ -1,11 +1,11 @@
 export interface birdsData {
-  name: { english: String; latin: String; spanish: String };
-  images: { main: String };
-  uid: String;
+  name: { english: string; latin: string; spanish: string };
+  images: { main: string };
+  uid: string;
   sort: Number;
 }
 
 export interface InitialState {
-  birds: { birds: Array<{ birdsData }> };
+  birds: { birds: Array<birdsData> };
   theme: { dark: Boolean };
 }

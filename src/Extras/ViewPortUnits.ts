@@ -1,16 +1,5 @@
-var React = require("react-native"),
-  Dimensions = React.Dimensions,
-  { width, height } = Dimensions.get("window");
-
-const vwa = width / 100;
-
-const vha = height / 100;
-
-var units = {
-  vw: vwa / 100,
-  vh: vha / 100,
-  vmin: Math.min(vwa, vha),
-  vmax: Math.max(vwa, vha),
-};
-
-export default units;
+import { Dimensions } from 'react-native';
+export const vw = number => Dimensions.get('window').width * (number / 100);
+export const vh = number => Dimensions.get('window').height * (number / 100);
+export const vmin = number => Math.min(Dimensions.get('window').width * (number / 100), Dimensions.get('window').height * (number / 100));
+export const vmax = number => Math.max(Dimensions.get('window').width * (number / 100), Dimensions.get('window').height * (number / 100));

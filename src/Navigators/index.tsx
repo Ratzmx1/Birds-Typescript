@@ -10,7 +10,7 @@ import { Button } from "native-base";
 import { Text } from "react-native";
 
 import Home from "./HomeStack";
-import Search from "../Components/Search";
+import Search from "./SearchStack";
 
 import { changeTheme } from "../Redux/actionCreators";
 import { InitialState } from "../Redux/reduxIntefaces";

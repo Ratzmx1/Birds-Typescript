@@ -1,18 +1,53 @@
 import React from "react";
-import { View, Text } from "react-native";
-import { Card } from "native-base";
+import { Image, TouchableHighlight, View } from "react-native";
+import { useSelector } from "react-redux";
+// import { useNavigation } from "@react-navigation/native";
 
-import units from "../../Extras/ViewPortUnits";
-import { birdsData } from "../../Redux/reduxIntefaces";
+import Text from "../General/Texto";
 
-const Bird: React.FC<{ bird: birdsData }> = (props) => {
-  const { vh } = units;
+import { birdsData, InitialState } from "../../Redux/reduxIntefaces";
+
+import { secondary } from "../../Extras/colors";
+
+const Bird: React.FC<{ bird: birdsData }> = ({ bird }) => {
+  const theme = useSelector((state: InitialState) => state.theme.dark);
   return (
-    <View style={{ marginTop: vh * 10 }}>
-      <Card>
-        <Text>{JSON.stringify(props)}</Text>
-      </Card>
-    </View>
+    <TouchableHighlight
+      style={{
+        backgroundColor: secondary(theme),
+        margin: 14,
+        borderRadius: 15,
+        elevation: 1,
+      }}
+    >
+      <View style={{ flex: 1, flexDirection: "row" }}>
+        <View>
+          <Image
+            source={{ uri: bird.images.main }}
+            style={{
+              width: 100,
+              height: 100,
+              left: 0,
+              borderTopLeftRadius: 15,
+              borderBottomLeftRadius: 15,
+              borderColor: "#0007",
+              borderWidth: 0.1,
+            }}
+          />
+        </View>
+
+        <View
+          style={{
+            padding: 15,
+            flex: 1,
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ fontSize: 18 }}>{bird.name.spanish}</Text>
+        </View>
+      </View>
+    </TouchableHighlight>
   );
 };
 

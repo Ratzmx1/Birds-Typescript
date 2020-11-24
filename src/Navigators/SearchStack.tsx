@@ -4,14 +4,13 @@ import { useSelector } from "react-redux";
 
 import { InitialState } from "../Redux/reduxIntefaces";
 
-import Home from "../Components/Home";
-import Bird from "../Components/Bird";
+import Search from "../Components/Search";
 
 import { primary, secondary, textColor } from "../Extras/colors";
 
 const Stack = createStackNavigator();
 
-const HomeStack: React.FC = () => {
+const SearchStack: React.FC = () => {
   const dark = useSelector((state: InitialState) => state.theme.dark);
 
   return (
@@ -23,10 +22,9 @@ const HomeStack: React.FC = () => {
         cardStyle: { backgroundColor: primary(dark) },
       }}
     >
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Bird" component={Bird} />
+      <Stack.Screen name="Search" component={Search} />
     </Stack.Navigator>
   );
 };
 
-export default HomeStack;
+export default SearchStack;
