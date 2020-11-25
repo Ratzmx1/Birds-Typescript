@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
-import { View, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, FlatList, ActivityIndicator } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-// import { Button, Container, Content, Text } from "native-base";
 
 import { fetchBirds } from "../../Redux/actionCreators";
 
 import { InitialState } from "../../Redux/reduxIntefaces";
-
-// import { primary, secondary, textColor } from "../../Extras/colors";
-// import { birdsData } from "../../Redux/reduxIntefaces";
 
 import { Bird } from "./Bird";
 
@@ -21,13 +17,19 @@ const Home: React.FC = () => {
     dispatch(fetchBirds());
   }, []);
 
-  return (
+  return birds !== [] ? (
     <View>
       <FlatList
         data={birds}
         renderItem={({ item }) => <Bird key={item.uid} bird={item} />}
         keyExtractor={(item, index) => index.toString()}
       />
+    </View>
+  ) : (
+    <View
+      style={{ flex: 1, flexDirection: "column", justifyContent: "center" }}
+    >
+      <ActivityIndicator size="large" color="#7303fc" />
     </View>
   );
 };

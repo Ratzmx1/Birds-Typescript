@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ADD_BIRDS, CHANGE_THEME, SET_THEME } from "./actionTypes";
-import { baseUrl } from "../../baseUrl";
+import { baseUrl } from "../Extras/baseUrl";
 
 export const fetchBirds = () => (dispatch) => {
   return axios

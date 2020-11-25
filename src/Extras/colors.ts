@@ -1,11 +1,11 @@
 export const primary = (dark: Boolean) => {
-  return dark ? "#444" : "#EEE";
+  return dark ? "#222" : "#EEE";
 };
 
 export const secondary = (dark: Boolean) => {
-  return dark ? "#333" : "#FFF";
+  return dark ? "#333333" : "#FCFCFC";
 };
 
 export const textColor = (dark: Boolean) => {
-  return dark ? "#FFF" : "#000";
+  return dark ? "#FCFCFC" : "#000";
 };
