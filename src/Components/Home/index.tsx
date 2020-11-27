@@ -13,16 +13,31 @@ const Home: React.FC = () => {
 
   const birds = useSelector((state: InitialState) => state.birds.birds);
 
+  const [selected, setSelected] = useState([]);
+  const [index, setIndex] = useState(1);
+  const [refreshing, setRefreshing] = useState(false);
+
   useEffect(() => {
     dispatch(fetchBirds());
   }, []);
 
-  return birds !== [] ? (
+  useEffect(() => {
+    if (birds.length > 0) {
+      if (birds.length > index * 10) {
+        setSelected(selected.concat(birds.slice((index - 1) * 10, index * 10)));
+      }
+    }
+  }, [birds, index]);
+
+  return selected.length > 0 ? (
     <View>
       <FlatList
-        data={birds}
+        data={selected}
         renderItem={({ item }) => <Bird key={item.uid} bird={item} />}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item) => item.uid}
+        onEndReached={() => setIndex(index + 1)}
+        onEndReachedThreshold={0.3}
+        initialNumToRender={10}
       />
     </View>
   ) : (

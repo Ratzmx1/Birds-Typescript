@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   DrawerContentScrollView,
   DrawerItemList,
   createDrawerNavigator,
 } from "@react-navigation/drawer";
 import { useSelector, useDispatch } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { Button } from "native-base";
 import { Text } from "react-native";
@@ -12,7 +13,7 @@ import { Text } from "react-native";
 import Home from "./HomeStack";
 import Search from "./SearchStack";
 
-import { changeTheme } from "../Redux/actionCreators";
+import { changeTheme, setTheme } from "../Redux/actionCreators";
 import { InitialState } from "../Redux/reduxIntefaces";
 import { primary, secondary, textColor } from "../Extras/colors";
 
@@ -44,6 +45,14 @@ const index: React.FC = () => {
   const dark = useSelector((state: InitialState) => state.theme.dark);
 
   const dispatch = useDispatch();
+  useEffect(() => {
+    AsyncStorage.getItem("theme").then((theme) => {
+      if (theme) {
+        dispatch(setTheme(JSON.parse(theme)));
+      }
+    });
+  }, []);
+
   return (
     <Drawer.Navigator
       drawerStyle={{ backgroundColor: primary(dark) }}

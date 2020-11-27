@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ADD_BIRDS, CHANGE_THEME, SET_THEME } from "./actionTypes";
 import { baseUrl } from "../Extras/baseUrl";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const fetchBirds = () => (dispatch) => {
   return axios
@@ -24,7 +25,7 @@ export const setTheme = (theme: Boolean) => {
   return { type: SET_THEME, payload: theme };
 };
 
-interface birdsData {
+export interface birdsData {
   name: { english: String; latin: String; spanish: String };
   images: { main: String };
   uid: String;
@@ -32,6 +33,6 @@ interface birdsData {
 }
 
 export interface initialState {
-  birds: { bird: Array<{ birdsData }> };
+  birds: { bird: Array<birdsData> };
   theme: { dark: Boolean };
 }
