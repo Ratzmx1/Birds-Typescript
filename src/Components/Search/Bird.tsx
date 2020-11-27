@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
 import { birdsData } from "../../Redux/reduxIntefaces";
+import { vmin, vh, vw } from "../../Extras/ViewPortUnits";
 
 const Bird: React.FC<{
   bird: birdsData;
@@ -10,12 +11,12 @@ const Bird: React.FC<{
   return (
     <View
       style={{
-        marginHorizontal: 20,
-        marginVertical: 10,
+        marginHorizontal: vw(4),
+        marginVertical: vh(1.1),
         borderColor: "#0002",
         borderWidth: 1,
         borderRadius: 15,
-        padding: 15,
+        padding: vmin(3.1),
         flex: 1,
         flexDirection: "row",
         backgroundColor: bg_color,
@@ -23,17 +24,27 @@ const Bird: React.FC<{
     >
       <Image
         source={{ uri: bird.images.main }}
-        style={{ width: 50, height: 50, borderRadius: 25 }}
+        style={{
+          width: vmin(10.6),
+          height: vmin(10.6),
+          borderRadius: vmin(10),
+        }}
       />
       <View
         style={{
-          marginLeft: 15,
+          marginLeft: vw(5),
           flex: 1,
           flexDirection: "column",
           justifyContent: "center",
         }}
       >
-        <Text style={{ fontSize: 17, color: text_color }}>
+        <Text
+          style={{
+            fontSize: vmin(3.5),
+            fontFamily: "Montserrat",
+            color: text_color,
+          }}
+        >
           {" "}
           {bird.name.spanish}{" "}
         </Text>

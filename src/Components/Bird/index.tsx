@@ -1,5 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useRoute, useNavigation, RouteProp } from "@react-navigation/native";
+import React, { useEffect, useState, useRef } from "react";
+import {
+  useRoute,
+  useNavigation,
+  RouteProp,
+  DrawerActions,
+} from "@react-navigation/native";
 import nodeEmoji from "node-emoji";
 import { Audio } from "expo-av";
 import axios from "axios";
@@ -10,6 +15,7 @@ import {
   ScrollView,
   ToastAndroid,
   TouchableOpacity,
+  PanResponder,
 } from "react-native";
 
 import { baseUrl } from "../../Extras/baseUrl";
@@ -86,8 +92,20 @@ const Bird: React.FC = () => {
     }
   };
 
+  const panResponder = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponderCapture: () => true,
+      onPanResponderMove: ({}, { dx }) => {
+        if (dx > 85) {
+          navigation.dispatch(DrawerActions.openDrawer());
+        }
+      },
+    })
+  );
+
   return bird ? (
-    <ScrollView>
+    <ScrollView {...panResponder.current.panHandlers}>
       <TouchableOpacity
         style={{
           flexDirection: "row",

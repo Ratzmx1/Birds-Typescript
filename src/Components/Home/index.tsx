@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { View, FlatList, ActivityIndicator } from "react-native";
+import React, { useEffect, useState, useRef } from "react";
+import { View, FlatList, ActivityIndicator, PanResponder } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchBirds } from "../../Redux/actionCreators";
 
 import { InitialState } from "../../Redux/reduxIntefaces";
+
+import { useNavigation, DrawerActions } from "@react-navigation/native";
+import { vh } from "../../Extras/ViewPortUnits";
 
 import { Bird } from "./Bird";
 
@@ -16,6 +19,7 @@ const Home: React.FC = () => {
   const [selected, setSelected] = useState([]);
   const [index, setIndex] = useState(1);
   const [refreshing, setRefreshing] = useState(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
     dispatch(fetchBirds());
@@ -29,8 +33,20 @@ const Home: React.FC = () => {
     }
   }, [birds, index]);
 
+  const panResponder = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponderCapture: () => true,
+      onPanResponderMove: ({}, { dx }) => {
+        if (dx > 85) {
+          navigation.dispatch(DrawerActions.openDrawer());
+        }
+      },
+    })
+  );
+
   return selected.length > 0 ? (
-    <View>
+    <View style={{ minHeight: vh(93) }} {...panResponder.current.panHandlers}>
       <FlatList
         data={selected}
         renderItem={({ item }) => <Bird key={item.uid} bird={item} />}

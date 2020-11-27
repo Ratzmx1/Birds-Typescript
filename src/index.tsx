@@ -13,7 +13,6 @@ const Main: React.FC = () => {
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
       Castoro: require("./Castoro-Regular.ttf"),
       Montserrat: require("./Montserrat-Medium.ttf"),
-      Oleo: require("./OleoScript-Regular.ttf"),
     }).then(() => {
       changeLoading(false);
     });
